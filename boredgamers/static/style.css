@@ -1,0 +1,81 @@
+body, html {
+  height: 100%;
+}
+
+body {
+  background: #000;
+  background-image: url('../static/dice-bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  width: auto;
+  max-width: 100%;
+}
+
+main.container {
+  padding: 35px;
+  background-color: rgba(0,0,0,0.8);
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+.navbar-nav {
+  list-style-type: none;
+  float: right;
+}
+
+.navbar-nav li {
+  display: inline;
+  float: left;
+}
+
+.navbar-nav a.nav-item.nav-link {
+  color:#fff ;
+  text-decoration: none;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin: 20px;
+}
+
+
+@media (max-width:767px) {
+  .navbar-nav a.nav-item.nav-link {
+    margin:0;
+    text-align: center;
+  }
+
+  .navbar-nav {
+    float: none;
+  }
+}
+
+h1.main-title {
+  margin-top: 40px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.content-section {
+  /* background-color: rgba(0,0,0,0.8); */
+  padding: 20px;
+}
+
+.games-table tr th {
+  text-transform: capitalize;
+}
+
+.games-table tr th, .games-table tr td {
+  padding:8px;
+}
+
+.games-table tr td:not(:nth-child(2)) {
+  text-align: center;
+}
+
+.games-table tr:hover {
+  background-color: rgb(27, 27, 27);
+  cursor: context-menu;
+}
