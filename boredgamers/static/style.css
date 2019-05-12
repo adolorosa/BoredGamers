@@ -63,19 +63,15 @@ h1.main-title {
   padding: 20px;
 }
 
-.games-table tr th {
-  text-transform: capitalize;
-}
-
-.games-table tr th, .games-table tr td {
+#games-table tr th, .games-table tr td {
   padding:8px;
 }
 
-.games-table tr td:not(:nth-child(2)) {
+#games-table tr td:not(:nth-child(2)) {
   text-align: center;
 }
 
-.games-table tr:hover {
+#games-table tr:hover {
   background-color: rgb(27, 27, 27);
   cursor: context-menu;
 }

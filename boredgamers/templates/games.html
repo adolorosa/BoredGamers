@@ -2,6 +2,23 @@
 {% block content %}
     <div class="content-section">
         <h1>Games</h1>
-        {{ games|safe }}
+        <table id="games-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Average rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for game in games %}
+                    <tr id="{{ game.id }}">
+                        <td>{{ game.rank }}</td>
+                        <td>{{ game.name }}</td>
+                        <td>{{ game.average_rating }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock content %}

@@ -4,7 +4,7 @@ from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from boredgamers import app, db, bcrypt
 from boredgamers.forms import RegistrationForm, LoginForm, UpdateAccountForm
-from boredgamers.models import User
+from boredgamers.models import User, Game
 from flask_login import login_user, current_user, logout_user, login_required
 from prettytable import from_csv
 
@@ -92,10 +92,5 @@ def account():
 
 @app.route("/games")
 def games():
-    with open("boredgamers/static/bgg_data.csv", "r") as games_data:
-        data = from_csv(games_data)
-
-    games = data.get_html_string(
-        fields=["rank", "names", "avg_rating"], attributes={"class": "games-table"}
-    )
+    games = Game.query.order_by(Game.rank).all()
     return render_template("games.html", title="Games", games=games)
