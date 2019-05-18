@@ -6,6 +6,7 @@
             <thead>
                 <tr>
                     <th>Rank</th>
+                    <th>Thumbnail</th>
                     <th>Name</th>
                     <th>Average rating</th>
                 </tr>
@@ -14,6 +15,7 @@
                 {% for game in games %}
                     <tr id="{{ game.id }}">
                         <td>{{ game.rank }}</td>
+                        <td><img class="thumbnail" src="{{ game.image_url }}" /></td>
                         <td>{{ game.name }}</td>
                         <td>{{ game.average_rating }}</td>
                     </tr>

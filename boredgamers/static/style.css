@@ -63,8 +63,10 @@ h1.main-title {
   padding: 20px;
 }
 
-#games-table tr th, .games-table tr td {
-  padding:8px;
+#games-table tr th, #games-table tr td {
+  padding:12px;
+  vertical-align: middle;
+  text-align: center;
 }
 
 #games-table tr td:not(:nth-child(2)) {
@@ -74,4 +76,9 @@ h1.main-title {
 #games-table tr:hover {
   background-color: rgb(27, 27, 27);
   cursor: context-menu;
+}
+
+#games-table tr td img.thumbnail {
+  width: 100px;
+  height: auto;
 }
