@@ -5,7 +5,7 @@ import csv
 
 def upload_games_data():
 
-    with open ('bgg_data.csv', 'r') as games_data:
+    with open ('bgg_sample.csv', 'r') as games_data:
         data = csv.DictReader(games_data)
 
         for row in data:
