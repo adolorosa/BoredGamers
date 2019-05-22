@@ -6,7 +6,6 @@ from boredgamers import app, db, bcrypt
 from boredgamers.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from boredgamers.models import User, Game
 from flask_login import login_user, current_user, logout_user, login_required
-from prettytable import from_csv
 
 
 @app.route("/")
@@ -25,7 +24,9 @@ def register():
             "utf-8"
         )
         user = User(
-            username=form.username.data, email=form.email.data, password=hashed_password
+            username=form.username.data, email=form.email.data, password=hashed_password, 
+            location=form.location.data, age=form.age.data, favourite_games=form.favourite_games.data, 
+            about=form.about.data, availability=form.availability.data
         )
         db.session.add(user)
         db.session.commit()
@@ -87,12 +88,22 @@ def update_account(user_id):
             current_user.image_file = picture_file
         current_user.username = form.username.data
         current_user.email = form.email.data
+        current_user.location = form.location.data
+        current_user.age = form.age.data
+        current_user.favourite_games = form.favourite_games.data
+        current_user.about = form.about.data
+        current_user.availability = form.availability.data
         db.session.commit()
         flash("Your account has been updated!", "success")
         return redirect(url_for("account"))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
+        form.location.data = current_user.location
+        form.age.data = current_user.age
+        form.favourite_games.data = current_user.favourite_games
+        form.about.data = current_user.about
+        form.availability.data = current_user.availability
     return render_template(
         "update_account.html", title="Update account", user_id=user_id, form=form
     )

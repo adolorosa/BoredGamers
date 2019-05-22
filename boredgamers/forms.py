@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from boredgamers.models import User
 
@@ -15,6 +15,11 @@ class RegistrationForm(FlaskForm):
     confirm_password = PasswordField(
         "Confirm password", validators=[DataRequired(), EqualTo("password")]
     )
+    location = StringField("Location", validators=[DataRequired(), Length(min=0, max=60)])
+    age = IntegerField("Age")
+    favourite_games = StringField("My favourite games", validators=[Length(min=0, max=300)])
+    about = StringField("About me", validators=[Length(min=0, max=1000)])
+    availability = StringField("Availability (e.g. days of the week, specific hours)")
     submit = SubmitField("Sign Up")
 
     def validate_username(self, username):
@@ -45,6 +50,11 @@ class UpdateAccountForm(FlaskForm):
     picture = FileField(
         "Update profile picture", validators=[FileAllowed(["jpg", "png"])]
     )
+    location = StringField("Location", validators=[DataRequired(), Length(min=0, max=60)])
+    age = IntegerField("Age")
+    favourite_games = StringField("My favourite games", validators=[Length(min=0, max=300)])
+    about = StringField("About me", validators=[Length(min=0, max=1000)])
+    availability = StringField("Availability (e.g. days of the week, specific hours)")
     submit = SubmitField("Update")
 
     def validate_username(self, username):

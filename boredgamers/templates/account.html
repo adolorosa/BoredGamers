@@ -1,12 +1,28 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <div class="content-section">
+    <div class="content-section user-info">
         <div class="media">
             <img class="rounded-circle account-img mr-4" src="{{ image_file }}">
             <div class="media-body">
                 <a class="float-right" href="{{ url_for('update_account', user_id=current_user.id) }}">Update account</a>
                 <h2 class="account-heading">{{ current_user.username }}</h2>
                 <p class="text-secondary">{{ current_user.email }}</p>
+                <p>{{ current_user.age }} years old</p>
+                <p><i class="fas fa-map-marker-alt"></i> {{ current_user.location }}</p>
+            </div>
+        </div>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-sm-6 pr-5">
+                    <h5>About me:</h5>
+                    <p>{{ current_user.about }}</p>
+                </div>
+                <div class="col-sm-6 pl-5">
+                    <h5>I play:</h5>
+                    <p class="mb-5">{{ current_user.favourite_games }}</p>
+                    <h5>I'm available:</h5>
+                    <p>{{ current_user.availability }}</p>
+                </div>
             </div>
         </div>
     </div>
