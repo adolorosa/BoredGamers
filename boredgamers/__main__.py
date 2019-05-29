@@ -1,4 +1,4 @@
-from boredgamers import db
+from boredgamers import db, app
 from boredgamers.models import User, Game
 import argparse
 import csv
