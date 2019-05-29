@@ -1,6 +1,7 @@
 from boredgamers import db
 from boredgamers.models import User, Game
 import argparse
+import csv
 
 
 # parse arguments:
@@ -10,7 +11,7 @@ import argparse
 
 
 # create all tables (if they don't exist):
-db.create.all()
+db.create_all()
 
 
 # populate the database with games data:
