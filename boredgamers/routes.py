@@ -1,4 +1,4 @@
-import os
+import os, io
 import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
@@ -23,8 +23,10 @@ def register():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode(
             "utf-8"
         )
+        default_pic_path = os.path.join(app.root_path, "static/profile_pics/default.jpg")
+        default = save_picture(default_pic_path)
         user = User(
-            username=form.username.data, email=form.email.data, password=hashed_password, 
+            username=form.username.data, email=form.email.data, password=hashed_password, image_file=default,
             location=form.location.data, age=form.age.data, favourite_games=form.favourite_games.data, 
             about=form.about.data, availability=form.availability.data
         )
@@ -62,17 +64,21 @@ def save_picture(form_picture):
     output_size = (200, 200)
     i = Image.open(form_picture)
     i.thumbnail(output_size)
-    i_binary = i.tobytes()
-    return i_binary
+    buf = io.BytesIO()
+    i.save(buf, format=i.format)
+    bts = buf.getvalue()
+    return bts
     
 
 
 @app.route("/account")
 @login_required
 def account():
-    image_file = Image.frombytes('RGB', (200, 200), current_user.image_file)
+    buf = io.BytesIO(current_user.image_file)
+    profile_pic = Image.open(buf)
+
     return render_template(
-        "account.html", title="Account", image_file=image_file
+        "account.html", title="Account", profile_pic=profile_pic
     )
 
 
@@ -83,8 +89,7 @@ def update_account(user_id):
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
-        else:
-            picture_file = save_picture(url_for("static", filename="profile_pics/default.jpg"))
+
         current_user.image_file = picture_file
         current_user.username = form.username.data
         current_user.email = form.email.data
