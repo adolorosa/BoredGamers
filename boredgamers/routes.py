@@ -1,7 +1,7 @@
 import os, io
 import secrets
 from PIL import Image
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, send_file
 from boredgamers import app, db, bcrypt
 from boredgamers.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from boredgamers.models import User, Game
@@ -70,15 +70,20 @@ def save_picture(form_picture):
     return bts
     
 
+@app.route("/picture/<int:userid>")
+def picture(userid):
+    user = User.query.filter_by(id=userid).first()
+    picture = user.image_file
+    return send_file(io.BytesIO(picture), mimetype="image/jpeg")
+
 
 @app.route("/account")
 @login_required
 def account():
-    buf = io.BytesIO(current_user.image_file)
-    profile_pic = Image.open(buf)
-
+    userid = current_user.id
+    profile_pic = picture(userid)
     return render_template(
-        "account.html", title="Account", profile_pic=profile_pic
+        "account.html", title="Account", userid=userid
     )
 
 
@@ -89,7 +94,6 @@ def update_account(user_id):
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
-
         current_user.image_file = picture_file
         current_user.username = form.username.data
         current_user.email = form.email.data
