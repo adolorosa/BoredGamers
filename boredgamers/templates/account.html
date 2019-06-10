@@ -2,7 +2,7 @@
 {% block content %}
     <div class="content-section user-info">
         <div class="media">
-            <img class="rounded-circle account-img mr-4" src="{{ image_file }}">
+            <img class="rounded-circle account-img mr-4" src="{{ url_for('picture', userid=userid) }}">
             <div class="media-body">
                 <a class="float-right" href="{{ url_for('update_account', user_id=current_user.id) }}">Update account</a>
                 <h2 class="account-heading">{{ current_user.username }}</h2>
