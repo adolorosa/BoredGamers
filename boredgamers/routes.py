@@ -74,7 +74,8 @@ def save_picture(form_picture):
 def picture(userid):
     user = User.query.filter_by(id=userid).first()
     picture = user.image_file
-    return send_file(io.BytesIO(picture), mimetype="image/jpeg")
+    image = Image.open(io.BytesIO(picture))
+    return send_file(io.BytesIO(picture), mimetype=f"image/{image.format}")
 
 
 @app.route("/account")

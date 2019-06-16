@@ -19,7 +19,6 @@ Jinja2
 MarkupSafe
 mccabe
 Pillow
-prettytable
 PTable
 pycodestyle
 pycparser
