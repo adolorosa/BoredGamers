@@ -23,6 +23,7 @@ PTable
 pycodestyle
 pycparser
 pyflakes
+python-dotenv
 requests
 six
 SQLAlchemy
