@@ -2,10 +2,10 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+from boredgamers.config import Config
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "333cf83a4c36987b1842e7e38c03a001"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
+app.config.from_object(Config)
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
