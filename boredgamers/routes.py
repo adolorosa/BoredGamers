@@ -95,7 +95,7 @@ def update_account(user_id):
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
-        current_user.image_file = picture_file
+            current_user.image_file = picture_file
         current_user.username = form.username.data
         current_user.email = form.email.data
         current_user.location = form.location.data
